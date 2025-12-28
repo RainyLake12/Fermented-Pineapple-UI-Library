@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd CMake
-cmake . $@ && make
+cd build
+cmake .. $@ && make
