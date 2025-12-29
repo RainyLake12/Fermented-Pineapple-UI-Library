@@ -65,21 +65,24 @@ vector<Token> lex(string text)
             continue;
         } else
         {
-            if (ch == ';')
-            {
-                Token token;
-                token.type = SEMI;
-                tokens.push_back(token);
-                continue;
-            } else if (opChars.find(ch) != string::npos)
+            if (opChars.find(ch) != string::npos)
             {
                 Token token;
                 token.type = getTokenByChar(ch);
+                token.value = ch;
                 tokens.push_back(token);
                 continue;
+            } else
+            {
+                throw "Invalid character found : " + ch;
             }
         }
     }
+
+    Token endToken;
+    endToken.type = END;
+    endToken.value = "END OF FILE";
+    tokens.push_back(endToken);
 
     return tokens;
 }
