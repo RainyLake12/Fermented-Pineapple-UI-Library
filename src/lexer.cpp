@@ -1,20 +1,9 @@
 #include <string>
 #include <objects.hpp>
 #include <sstream>
+#include <lexer.hpp>
 
-using std::string, std::stringstream, std::vector;
-
-enum TokenTypes
-{
-    LPAREN, RPAREN, COLON, LCURLY, RCURLY, IDENT, NUM, STRING,
-    PLUS, MINUS, STAR, SLASH, EQUAL, SEMI, END
-};
-
-struct Token
-{
-    TokenTypes type;
-    string value;
-};
+using std::string, std::vector, std::stringstream;
 
 TokenTypes getTokenByChar(char token)
 {
@@ -28,13 +17,14 @@ TokenTypes getTokenByChar(char token)
     if (token == '}') return RCURLY;
     if (token == ';') return SEMI;
     if (token == ':') return COLON;
+    if (token == '#') return HASH;
 
     return SEMI;
 }
 
 vector<Token> lex(string text)
 {
-    string opChars = "+-*/=;(){}:";
+    string opChars = "+-*/=;(){}:#";
     vector<string> operators = {};
     vector<Token> tokens;
     stringstream stream(text);
